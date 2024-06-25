@@ -69,7 +69,7 @@ local keywords = {
   structure = lookupify({
     'and', 'break', 'do', 'else', 'elseif', 'end', 'for', 'function',
     'goto', 'if', 'in', 'local', 'not', 'or', 'repeat', 'return', 'then',
-    'until', 'while'
+    'until', 'while', '<const>'
   }),
 
   values = lookupify({
@@ -90,7 +90,6 @@ return function(text)
 
   local function get()
     pos = pos + 1
-
     return look(-1)
   end
 
@@ -386,7 +385,7 @@ return function(text)
       pushToken('operator')
     elseif chars.symbols[char] then
       if chars.symbols.operators[char] then
-        if look() == '=' then
+        if look() == '=' or (char == '/' and look() == '/') then
           pos = pos + 1
         end
 

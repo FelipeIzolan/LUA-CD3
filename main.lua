@@ -1,3 +1,4 @@
+local inspect = require("inspect")
 local lexer = require("lexer")
 local ast = require("ast")
 
